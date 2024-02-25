@@ -48,7 +48,6 @@ class Professeur extends Model
         'telephone',
         'userId',
         'user',
-        'courId',
         'cour',
         'classesId',
     ];

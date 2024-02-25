@@ -489,7 +489,6 @@ class ProfesseurController extends Controller
         $professeurFound->telephone = $request->input('telephone');
         $professeurFound->statut =  $request->input('statut');
 
-        $professeurFound->courId = $request->input('courId');
         $professeurFound->save();
 
         $professeurFound->user = $user;

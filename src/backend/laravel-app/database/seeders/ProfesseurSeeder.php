@@ -42,7 +42,6 @@ for ($i = 1; $i <= 10; $i++) {
         'sexe' => 'm',
         'telephone' => '+237666534899',
         'userId' => $user->id,
-        'courId' => $i, // Assuming each professor is associated with a different course (courId = i)
     ]);
 
     // Store the user and professor in arrays for future use
