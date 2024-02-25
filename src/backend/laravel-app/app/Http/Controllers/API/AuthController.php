@@ -17,6 +17,7 @@ use App\Models\Eleve;
 use App\Models\Parents;
 use App\Models\Personnel;
 use App\Models\Professeur;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
@@ -63,7 +64,7 @@ class AuthController extends Controller
      *                 },
      *                 "email": {
      *                     "L'email est un champ requis."
-     *                 }     
+     *                 }
      *             })
      *         )
      *     ),
@@ -110,14 +111,14 @@ class AuthController extends Controller
             'username' => $request->username,
             'password' => bcrypt($request->password),
         ]);
-        
+
         // Créer un utilisateur de base avec le rôle user
         $userRole = Role::where('name', 'user')->first();
-        
+
         $user->roles()->attach($userRole);
-        
+
         return response()->json([
-            'content' => $user, 
+            'content' => $user,
             'message' => "User successfully created",
             'success' => true
         ], 200);
@@ -171,7 +172,7 @@ class AuthController extends Controller
         $request->validate([
             "username" => "required",
             "password" => "required",
-          
+
         ]);
 
         // verify user + token
@@ -185,7 +186,7 @@ class AuthController extends Controller
         $user = User::find(auth()->user()->id);
         $user->roles;
         $user->permissions;
-        
+
         if ($request->persistent === "admin")
         {$user->persistent = $request->persistent;
             if($user->roles->contains('name', ELEVE_ROLE['name'])){
@@ -252,7 +253,7 @@ class AuthController extends Controller
                     ]
             ], 200);
         }
-        
+
        /*  // on recupere les donnees personnel du user qui se connecte:
         if($user->roles->contains('name', ELEVE_ROLE['name'])){
             $user->model = $user->eleve;
@@ -262,8 +263,8 @@ class AuthController extends Controller
             $user->model = $user->professeur;
         } elseif ($user->roles->contains('name', PERSONNEL_ROLE['name'])){
             $user->model = $user->personnel;
-        }
- */
+        } */
+
         // send response
        /*  return response()->json([
             "success" => true,
@@ -355,7 +356,7 @@ class AuthController extends Controller
         try {
             JWTAuth::parseToken()->authenticate(); // Vérifie que le token JWT existe et est valide
             JWTAuth::invalidate(JWTAuth::getToken()); // Invalide le token JWT
-            return response()->json(['message' => 'Successfully logged out'],200);
+            return response()->json(['message' => 'Successfully logged out'], 200);
         } catch (JWTException $e) {
             return response()->json(['error' => 'Invalid token'], 401);
         }

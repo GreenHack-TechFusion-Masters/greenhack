@@ -20,7 +20,6 @@ use Illuminate\Database\Eloquent\Model;
  *     @OA\Property(property="solvable", type="boolean", example=true),
  *     @OA\Property(property="redoublant", type="boolean", example=false),
  *     @OA\Property(property="user", type="object", ref="#/components/schemas/User"),
- *     @OA\Property(property="classe", type="object", ref="#/components/schemas/Classe"),
  *     @OA\Property(property="created_at", ref="#/components/schemas/BaseModel/properties/created_at"),
  *     @OA\Property(property="updated_at", ref="#/components/schemas/BaseModel/properties/updated_at"),
  *     @OA\Property(property="deleted_at", ref="#/components/schemas/BaseModel/properties/deleted_at")
@@ -48,7 +47,6 @@ class Eleve extends Model
         'sexe',
         'telephone',
         'userId',
-        'classeId',
         'user',
         'classe',
     ];
